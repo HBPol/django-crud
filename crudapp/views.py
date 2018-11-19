@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from crudapp.models import Member
-from requests.api import request
 
 def index(request):
-    members = Member.object.all()
+    members = Member.objects.all()
     context = {'members': members}
     return render(request, 'crudapp/index.html', context)
 
@@ -20,7 +19,7 @@ def edit(request, id):
 def update(request, id):
     member = Member.objects.get(id=id)
     member.firstname = request.POST['firstname']
-    member.lasttname = request.POST['lastname']
+    member.lastname = request.POST['lastname']
     member.save()
     return redirect('/crudapp/')
 
