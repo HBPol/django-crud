@@ -1,0 +1,13 @@
+{% extends 'crudapp/base_generic.html' %}
+{% block content %}
+<form action="" method="POST">
+	{% csrf_token %}
+	<div>
+		<label for="firstname">Firstname</label><br>
+		<input type="text" name="firstname" required="required"/><br>
+		<label for="lastname">Lastname</label><br>
+		<input type="text" name="lastname" required="required"/><br><br>
+		<button type="submit">Add</button><br>
+	</div>
+</form>
+{% endblock %}

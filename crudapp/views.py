@@ -7,9 +7,12 @@ def index(request):
     return render(request, 'crudapp/index.html', context)
 
 def create(request):
-    member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'])
-    member.save()
-    return redirect('/')
+    if request.method == "POST":
+        member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'])
+        member.save()
+        return redirect('/')
+    else:
+        return render(request, 'crudapp/create.html')
 
 def edit(request, id):
     members = Member.objects.get(id=id)

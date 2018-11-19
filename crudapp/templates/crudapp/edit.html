@@ -1,6 +1,6 @@
 {% extends 'crudapp/base_generic.html' %}
 {% block content %}
-<form method="POST" action="update/{{ members.id }}">
+<form action="update/{{ members.id }}" method="POST">
 	{% csrf_token %}
 	<div>
 		<label for="firstname">Firstname</label><br>
