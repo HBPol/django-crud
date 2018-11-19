@@ -3,6 +3,7 @@ from crudapp.models import Member
 
 def index(request):
     members = Member.objects.all()
+    
     context = {'members': members}
     return render(request, 'crudapp/index.html', context)
 
