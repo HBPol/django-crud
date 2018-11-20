@@ -122,4 +122,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Custom user model
 AUTH_USER_MODEL = 'crudapp.User'

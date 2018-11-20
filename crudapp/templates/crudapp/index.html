@@ -5,6 +5,7 @@
 		<tr>
 		<th>Firstname</th>
 		<th>Lastname</th>
+		<th>Friend</th>
 		<th>Action</th>
 		</tr>
 	</thead>
@@ -13,6 +14,7 @@
 		<tr>
 			<td>{{ member.firstname }}</td>
 			<td>{{ member.lastname }}</td>
+			<td>{{ member.friendname.get_full_name }}</td>
 			<td><a href="edit/{{ member.id }}">Edit</a> | <a href="delete/{{ member.id }}">Delete</a></td>
 		</tr>
 		{% endfor %}

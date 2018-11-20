@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from crudapp.models import Member
+from crudapp.models import Member, User
 
 def index(request):
     members = Member.objects.all()
@@ -9,21 +9,26 @@ def index(request):
 
 def create(request):
     if request.method == "POST":
-        member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'])
+        member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'], friendname_id=request.POST['friendname'])
         member.save()
         return redirect('/')
     else:
-        return render(request, 'crudapp/create.html')
+        # Send list of users to populate the drop-down control
+        friendslist = User.objects.all()
+        context = {'friendslist': friendslist}
+        return render(request, 'crudapp/create.html', context)
 
 def edit(request, id):
     members = Member.objects.get(id=id)
-    context = {'members': members}
+    friendslist = User.objects.all()
+    context = {'members': members, 'friendslist': friendslist}
     return render(request, 'crudapp/edit.html', context)
 
 def update(request, id):
     member = Member.objects.get(id=id)
     member.firstname = request.POST['firstname']
     member.lastname = request.POST['lastname']
+    member.friendname_id = request.POST['friendname']
     member.save()
     return redirect('/crudapp/')
 
