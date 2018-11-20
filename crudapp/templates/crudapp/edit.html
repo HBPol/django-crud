@@ -1,27 +1,30 @@
 {% extends 'crudapp/base_generic.html' %}
 {% block content %}
-<form action="update/{{ members.id }}" method="POST" id="editform">
-	{% csrf_token %}
-	<div>
-		<label for="firstname">Firstname</label><br>
-		<input type="text" name="firstname" value="{{ members.firstname }}" required="required"/><br><br>
-		<label for="lastname">Lastname</label><br>
-		<input type="text" name="lastname" value="{{ members.lastname }}" required="required"/><br><br>
-		<button type="submit" class="btn btn-sm btn-warning">Update</button><br><br>
+	<div class="container">
+		<form action="update/{{ members.id }}" method="POST" id="editform">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="firstname">Firstname</label>
+				<input type="text" class="form-control" name="firstname" value="{{ members.firstname }}" required="required"/>
+			</div>
+			<div class="form-group">
+				<label for="lastname">Lastname</label>
+				<input type="text" class="form-control" name="lastname" value="{{ members.lastname }}" required="required"/>
+			</div>
+			<div class="form-group">
+				<label for="friendname">Select person</label>
+				<select class="form-control" name="friendname">
+					{# loop through the user list, and set the default to the user assigned to the current instance #}
+					{% for friend in friendslist %}
+						{% if friend.id == members.friendname_id %}
+							<option value="{{ friend.id }}" selected>{{ friend.get_full_name }}</option>
+						{% else %}
+							<option value="{{ friend.id }}">{{ friend.get_full_name }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Update</button>
+		</form>
 	</div>
-</form>
-<div>
-	<select name="friendname" form="editform">
-	
-		{# loop through the user list, and set the default to the user assigned to the current instance #}
-		
-		{% for friend in friendslist %}
-			{% if friend.id == members.friendname_id %}
-				<option value="{{ friend.id }}" selected>{{ friend.get_full_name }}</option>
-			{% else %}
-				<option value="{{ friend.id }}">{{ friend.get_full_name }}</option>
-			{% endif %}
-		{% endfor %}
-	</select>
-</div>
 {% endblock %}
