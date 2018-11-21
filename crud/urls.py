@@ -17,8 +17,19 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.urls import include, path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', RedirectView.as_view(url='/crudapp/')),
     path('crudapp/', include('crudapp.urls')),
     path('admin/', admin.site.urls),
 ]
+
+"""
+In the development server user uploaded files (media) can be server using django.contrib.staticfiles.views.serve() view.
+To access the MEDIA_URL in template django.template.context_processors.media must be added to the context_processeors
+inside the TEMPLATES config.
+"""
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
