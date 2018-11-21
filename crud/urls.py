@@ -20,13 +20,11 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 urlpatterns = [
     path('', RedirectView.as_view(url='/crudapp/')),
     path('crudapp/', include('crudapp.urls')),
     path('admin/', admin.site.urls),
 ]
-
 
 """
 In the development server user uploaded files (media) can be server using django.contrib.staticfiles.views.serve() view.

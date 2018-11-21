@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from crudapp.models import Member, User
+from django.core.files.storage import FileSystemStorage
 
 def index(request):
     members = Member.objects.all()
@@ -8,12 +10,17 @@ def index(request):
     return render(request, 'crudapp/index.html', context)
 
 def create(request):
-    if request.method == "POST":
-        member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'], friendname_id=request.POST['friendname'])
+    if request.method == "POST" and request.FILES['file']:
+        member = Member(
+            firstname=request.POST['firstname'],
+            lastname=request.POST['lastname'],
+            friendname_id=request.POST['friendname'],
+            file = request.FILES['file'],
+            )
         member.save()
         return redirect('/')
     else:
-        # Send list of users to populate the drop-down control
+        # Send user to the empty form along with the list of users to populate the drop-down control
         friendslist = User.objects.all()
         context = {'friendslist': friendslist}
         return render(request, 'crudapp/create.html', context)
