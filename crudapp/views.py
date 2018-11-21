@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from crudapp.models import Member, User
-from django.core.files.storage import FileSystemStorage
 
 def index(request):
     members = Member.objects.all()
@@ -36,6 +35,7 @@ def update(request, id):
     member.firstname = request.POST['firstname']
     member.lastname = request.POST['lastname']
     member.friendname_id = request.POST['friendname']
+    member.file = request.FILES['file']
     member.save()
     return redirect('/crudapp/')
 
