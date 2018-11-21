@@ -15,7 +15,7 @@ class Member(models.Model):
     firstname = models.CharField(max_length=40)
     lastname = models.CharField(max_length=40)
     friendname = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
+    file = models.FileField(upload_to='uploads/')
     def __str__(self):
         return self.firstname + " " + self.lastname
     
