@@ -9,7 +9,7 @@ def index(request):
     return render(request, 'crudapp/index.html', context)
 
 def create(request):
-    if request.method == "POST" and request.FILES['file']:
+    if request.method == "POST":
         member = Member(
             firstname=request.POST['firstname'],
             lastname=request.POST['lastname'],
