@@ -14,7 +14,8 @@ def create(request):
             firstname=request.POST['firstname'],
             lastname=request.POST['lastname'],
             friendname_id=request.POST['friendname'],
-            file = request.FILES['file'],
+            # Adding the get method ensures that if variable is empty, an empty value is assigned to 'file'
+            file = request.FILES.get('file', ''),
             )
         member.save()
         return redirect('/')
