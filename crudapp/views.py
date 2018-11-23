@@ -36,7 +36,8 @@ def update(request, id):
     member.firstname = request.POST['firstname']
     member.lastname = request.POST['lastname']
     member.friendname_id = request.POST['friendname']
-    member.file = request.FILES['file']
+    # Adding the get method ensures that if variable is empty, an empty value is assigned to 'file'
+    member.file = request.FILES.get('file', '')
     member.save()
     return redirect('/crudapp/')
 
