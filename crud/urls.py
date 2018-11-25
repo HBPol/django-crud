@@ -24,6 +24,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/accounts/login/')),
     path('crudapp/', include('crudapp.urls')),
     path('admin/', admin.site.urls),
+    
 ]
 
 """
@@ -33,8 +34,7 @@ inside the TEMPLATES config.
 """
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
- 
- 
+
 """
 This includes Django's default authentication urls
 """

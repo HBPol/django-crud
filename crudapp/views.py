@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from crudapp.models import Member, User
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     members = Member.objects.all()
-    
     context = {'members': members}
     return render(request, 'crudapp/index.html', context)
 
@@ -18,7 +19,7 @@ def create(request):
             file = request.FILES.get('file', ''),
             )
         member.save()
-        return redirect('/')
+        return redirect('index')
     else:
         # Send user to the empty form along with the list of users to populate the drop-down control
         friendslist = User.objects.all()
@@ -39,10 +40,10 @@ def update(request, id):
     # Adding the get method ensures that if variable is empty, an empty value is assigned to 'file'
     member.file = request.FILES.get('file', '')
     member.save()
-    return redirect('/crudapp/')
+    return redirect('index')
 
 def delete(request, id):
     member = Member.objects.get(id=id)
     member.delete()
-    return redirect('/crudapp/')
+    return redirect('index')
     

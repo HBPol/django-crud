@@ -131,5 +131,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # This is to redirect to a specified url (home). The default redirects to '/accounts/profile/'
-LOGIN_REDIRECT_URL = '/'
-
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
