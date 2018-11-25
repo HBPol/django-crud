@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/crudapp/')),
+    path('', RedirectView.as_view(url='/accounts/login/')),
     path('crudapp/', include('crudapp.urls')),
     path('admin/', admin.site.urls),
 ]
