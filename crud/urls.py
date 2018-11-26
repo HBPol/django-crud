@@ -21,9 +21,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/crudapp/')),
+    path('', RedirectView.as_view(url='/accounts/login/')),
     path('crudapp/', include('crudapp.urls')),
     path('admin/', admin.site.urls),
+    
 ]
 
 """
@@ -33,3 +34,11 @@ inside the TEMPLATES config.
 """
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+"""
+This includes Django's default authentication urls
+"""
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]   
+

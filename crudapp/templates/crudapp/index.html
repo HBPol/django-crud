@@ -18,11 +18,14 @@
 				<td>{{ member.lastname }}</td>
 				<td>{{ member.friendname.get_full_name }}</td>
 				<td><a href="{{ MEDIA_URL }}{{ member.file }}">{{ member.file }}</a></td>
-				<td><a href="edit/{{ member.id }}">Edit</a> | <a href="delete/{{ member.id }}">Delete</a></td>
+				<td>
+					<a href="edit/{{ member.id }}" class="btn btn-warning btn-sm" role="button">Edit</a>
+					<a href="delete/{{ member.id }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+				</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	<a href="create/">Add new</a>
+	<a href="create/" class="btn btn-primary" role="button">Add new</a>
 </div>
 {% endblock %}
