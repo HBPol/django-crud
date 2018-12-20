@@ -3,6 +3,8 @@ from django.conf import settings
 from crudapp.models import Member, User
 from django.contrib.auth.decorators import login_required
 
+from .forms import MyTestModelForm
+
 @login_required
 def index(request):
     members = Member.objects.all()
@@ -46,4 +48,12 @@ def delete(request, id):
     member = Member.objects.get(id=id)
     member.delete()
     return redirect('index')
+
+######### TESTING THE FORM CLASS ... #################
+def get_my_char(request):
+    if request.method == 'POST':
+        form = MyTestModelForm(request.POST)
+        
+
+
     
