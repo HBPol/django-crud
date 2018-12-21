@@ -15,4 +15,6 @@ urlpatterns = [
     
     path('delete/<int:id>', views.delete, name='delete'),
     
+    path('testform/', views.get_my_char, name='testform'),
+    
 ]

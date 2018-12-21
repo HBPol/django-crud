@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from crudapp.models import Member, User
+from crudapp.models import Member, User, MyTestModel
 from django.contrib.auth.decorators import login_required
-
-from .forms import MyTestModelForm
+from django.http import HttpResponseRedirect
+from crudapp.forms import MyTestModelForm
 
 @login_required
 def index(request):
@@ -49,11 +49,28 @@ def delete(request, id):
     member.delete()
     return redirect('index')
 
-######### TESTING THE FORM CLASS ... #################
+######### TESTING THE FORM CLASS ##################
 def get_my_char(request):
     if request.method == 'POST':
         form = MyTestModelForm(request.POST)
-        
-
-
+        if form.is_valid():
+            mytestmodel = MyTestModel(
+                my_char = form.cleaned_data['my_char'],
+                my_date = form.cleaned_data['my_date'],
+                my_datetime = form.cleaned_data['my_datetime'],
+                my_integer = form.cleaned_data['my_integer'],
+                my_boolean = form.cleaned_data['my_boolean'],
+                my_email = form.cleaned_data['my_email'],
+                my_text = form.cleaned_data['my_text'],
+                my_time = form.cleaned_data['my_time'],
+                )
+            mytestmodel.save()
+            return redirect('index')
+    else:
+        form = MyTestModelForm()
     
+    return render (request, 'crudapp/mytestmodelform.html', {'form': form})
+
+#########           END           #################
+    
+
