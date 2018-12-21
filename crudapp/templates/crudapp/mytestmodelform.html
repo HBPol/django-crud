@@ -1,11 +1,24 @@
 {% extends 'crudapp/base_generic.html' %}
 
 {% block content %}
+	<h1>Form from scratch (Form class)</h1>
 	<div class="container">
 		<form action="" method=POST>
 			{% csrf_token %}
-			{{ form.as_p }}
+			{{ form_01.as_p }}
 			<input type="submit" value="Submit">
 		</form>
 	</div>
+	<hr>
+	<h1>Form from model (ModelForm class)</h1>
+	<div class="container">
+		<form action="" method=POST>
+			{% csrf_token %}
+			{{ form_02.as_p }}
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+	
+	
+	
 {% endblock %}

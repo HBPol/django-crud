@@ -3,7 +3,7 @@ from django.conf import settings
 from crudapp.models import Member, User, MyTestModel
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from crudapp.forms import MyTestModelForm
+from crudapp.forms import MyTestModelForm_01, MyTestModelForm_02
 
 @login_required
 def index(request):
@@ -49,10 +49,10 @@ def delete(request, id):
     member.delete()
     return redirect('index')
 
-######### TESTING THE FORM CLASS ##################
-def get_my_char(request):
+######### TESTING THE FORM CLASS - WITH THE FORM CLASS CREATED FROM SCRATCH ##################
+def test_model_form_01(request):
     if request.method == 'POST':
-        form = MyTestModelForm(request.POST)
+        form = MyTestModelForm_01(request.POST)
         if form.is_valid():
             mytestmodel = MyTestModel(
                 my_char = form.cleaned_data['my_char'],
@@ -67,10 +67,27 @@ def get_my_char(request):
             mytestmodel.save()
             return redirect('index')
     else:
-        form = MyTestModelForm()
+        form = MyTestModelForm_01()
     
-    return render (request, 'crudapp/mytestmodelform.html', {'form': form})
+    return render (request, 'crudapp/mytestmodelform.html', {'form_01': form})
 
 #########           END           #################
     
+######### TESTING THE FORM CLASS - BUILDING THE FORM FROM THE MODEL ##################
+def test_model_form_02(request):
+    if request.method == 'POST':
+        form = MyTestModelForm_02(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = MyTestModelForm_02()
+    
+    return render (request, 'crudapp/mytestmodelform.html', {'form_02': form})
 
+
+
+
+
+
+##########           END           #################

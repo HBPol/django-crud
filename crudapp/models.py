@@ -21,7 +21,7 @@ class Member(models.Model):
         return self.firstname + " " + self.lastname
     
 class MyTestModel(models.Model):
-    my_char = models.CharField(max_length=50)
+    my_char = models.CharField("My char variable", max_length=50)
     my_date = models.DateField()
     my_datetime = models.DateTimeField()
     my_integer = models.IntegerField()

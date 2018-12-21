@@ -19,6 +19,7 @@
 				<td>{{ member.friendname.get_full_name }}</td>
 				<td><a href="{{ MEDIA_URL }}{{ member.file }}">{{ member.file }}</a></td>
 				<td>
+					<!-- TODO: remove hardcoded URLs -->
 					<a href="edit/{{ member.id }}" class="btn btn-warning btn-sm" role="button">Edit</a>
 					<a href="delete/{{ member.id }}" class="btn btn-danger btn-sm" role="button">Delete</a>
 				</td>
@@ -26,7 +27,10 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	<a href="create/" class="btn btn-primary" role="button">Add new</a>
-	<a href="testform/" class="btn btn-primary" role="button">Test form</a>
+	<a href="{% url 'create' %}" class="btn btn-primary" role="button">Add new</a>
+	<hr>
+	<a href="{% url 'testform-01' %}" class="btn btn-primary" role="button">Test form 1</a>
+	<a href="{% url 'testform-02' %}" class="btn btn-primary" role="button">Test form 2</a>
+
 </div>
 {% endblock %}
